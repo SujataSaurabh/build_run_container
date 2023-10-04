@@ -6,7 +6,6 @@
 2. build the docker image
    ```
    docker build -t consumer-rabbitmq-image . --no-cache
-
    ```
 3. run the image with config file mounted
    ```
@@ -24,7 +23,6 @@
 2. make a .docker directory
    ```
    mkdir -p /kaniko/.docker
-
    ```
 4. make a config file and copy following authernticating content
    ```
@@ -38,7 +36,6 @@
       }
     }
    EOF
-
    ```
 6. Make a Dcokerfile with following content
    ```
@@ -47,11 +44,9 @@
    RUN mkdir -p $rabbitmq_consumer_dir
    WORKDIR $rabbitmq_consumer_dir
    COPY rabbitmq_consumer.py $rabbitmq_consumer_dir
-
    ENTRYPOINT ["python3", "rabbitmq_consumer.py"]
    ```
-   7. Build and push the image
-      ```
-      > /kaniko/executor --cache=true --dockerfile=Dockerfile --destination=docker.registry/docker-container-registry/consumer-rabbitmq-image:latest --context . --skip-tls-verify
-
-      ```
+7. Build and push the image
+   ```
+   > /kaniko/executor --cache=true --dockerfile=Dockerfile --destination=docker.registry/docker-container-registry/consumer-rabbitmq-image:latest --context . --skip-tls-verify
+   ```
